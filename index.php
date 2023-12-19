@@ -36,7 +36,8 @@ session_start();
 		<div class="content">
             <?php
             if ($_SESSION['loggedin'] == True) {
-                echo 'Bine ai revenit, !';
+                echo '<h2>Acasă</h2>';
+                echo '<p>Bine ai revenit ' . $_SESSION['name'] . '.</p>';
             }
             else {
                 echo '<h2>Motto</h2>';
