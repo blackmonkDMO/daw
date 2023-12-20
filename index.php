@@ -28,6 +28,7 @@ session_start();
                 }
                 else {
                     echo '<a href="index.php"><i class="fa-solid fa-house"></i>Acasă</a>';
+                    echo '<a href="inregistrare.php"><i class="fa-solid fa-user-plus"></i></i>Înregistrare</a>';
                     echo '<a href="autentificare.php"><i class="fa-solid fa-lock"></i>Autentificare</a>';
                 }
                 ?>
