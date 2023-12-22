@@ -18,7 +18,7 @@ session_start();
 			<div>
 				<h1>Biblioteca BMK</h1>
                 <?php
-                if ($_SESSION['loggedin'] == True) {
+                if ($_SESSION['loggedin'] == True && $_SESSION['cod_activare'] == 'activat') {
                     echo '<a href="index.php"><i class="fa-solid fa-house"></i>Acasă</a>';
                     echo '<a href="profil.php"><i class="fas fa-user-circle"></i>Profil</a>';
                     if ($_SESSION['rol'] == 'admin') {
@@ -37,8 +37,14 @@ session_start();
 		<div class="content">
             <?php
             if ($_SESSION['loggedin'] == True) {
-                echo '<h2>Acasă</h2>';
-                echo '<p>Bine ai revenit ' . $_SESSION['name'] . '.</p>';
+                if ($_SESSION['cod_activare'] == 'activat') {
+                    echo '<h2>Acasă</h2>';
+                    echo '<p>Bine ai revenit ' . $_SESSION['name'] . '.</p>';
+                }
+                else {
+                    echo '<h2>Cont neactivat!</h2>';
+                    echo '<p>Salut! Contul ' . $_SESSION['name'] . ' nu a fost activat. Vă rugăm să verificați adresa de email folosită la înregistrare pentru link-ul necesar activării.<br>Puteți face logout <a href=iesire.php>aici</a>.<br>Alternativ, puteți șterge acest cont <a href=stergere.php>aici</a>.</p>';
+                }
             }
             else {
                 echo '<h2>Motto</h2>';
