@@ -54,12 +54,22 @@ if ($stmt = $db->prepare('SELECT Id, Parola FROM Conturi WHERE Utilizator = ?'))
 		echo 'Numele de utilizator ' . $_POST['utilizator'] . ' este deja folosit! Vă rugăm să alegeți altul. Puteți reîncerca <a href=inregistrare.php>aici</a>!';
 	} else {
 		// Utilizator doesn't exists, insert new account
-        if ($stmt = $db->prepare('INSERT INTO Conturi (Nume, Prenume, Utilizator, Parola, Rol, Email) VALUES (?, ?, ?, ?, ?, ?)')) {
+        if ($stmt = $db->prepare('INSERT INTO Conturi (Nume, Prenume, Utilizator, Parola, Rol, Email, CodActivare) VALUES (?, ?, ?, ?, ?, ?, ?)')) {
             $password = password_hash($_POST['parola'], PASSWORD_DEFAULT);
-            $rol = "user";
-            $stmt->bind_param('ssssss', $_POST['nume'], $_POST['prenume'], $_POST['utilizator'], $password, $rol, $_POST['email']);
+            $rol = 'user';
+            $uniqid = uniqid();
+            $stmt->bind_param('sssssss', $_POST['nume'], $_POST['prenume'], $_POST['utilizator'], $password, $rol, $_POST['email'], $uniqid);
             $stmt->execute();
-            echo 'Ai fost inregistrat cu succes! Acum te poți autentifica <a href=autentificare.php>aici</a>!';
+            
+            $from = 'noreply@blackmonk.ro';
+            $subject = 'daw.blackmonk.ro - Este necesară activarea contului';
+            $headers = 'From: ' . $from . "\r\n" . 'Reply-To: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
+            $link_activare = 'https://daw.blackmonk.ro/activare.php?email=' . $_POST['email'] . '&cod=' . $uniqid;
+            $message = '<p>Pentru a vă activa contul creat pe daw.blackmonk.ro vă rugăm să accesați acest link: <a href="' . $link_activare . '">' . $link_activare . '</a></p>';
+            
+            mail($_POST['email'], $subject, $message, $headers);
+            
+            echo 'Ai fost inregistrat cu succes!<br>Un Email cu un link necesar activării noului tău cont a fost trimis către ' . $_POST['email'] . '.<br>După activarea contului te poți autentifica <a href=autentificare.php>aici</a>!';
         } else {
             echo 'Eroare SQL!';
         }
