@@ -25,7 +25,7 @@ mysqli_close($db);
 	</head>
     
 	<body class="loggedin">
-<nav class="navtop">
+        <nav class="navtop">
 			<div>
 				<h1>Biblioteca BMK</h1>
                 <?php
