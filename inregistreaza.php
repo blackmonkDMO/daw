@@ -106,8 +106,8 @@ else {
                 $stmt->execute();
             
                 $from = 'noreply@blackmonk.ro';
-                $subject = 'daw.blackmonk.ro - Este necesară activarea contului';
-                $headers = 'From: ' . $from . "\r\n" . 'Reply-To: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
+                $subject = 'daw.blackmonk.ro - Este necesara activarea contului';
+                $headers = 'From: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8';
                 $link_activare = 'https://daw.blackmonk.ro/activare.php?email=' . $_POST['email'] . '&cod=' . $uniqid;
                 $message = '<p>Pentru a vă activa contul creat pe daw.blackmonk.ro vă rugăm să accesați acest link: <a href="' . $link_activare . '">' . $link_activare . '</a></p>';
             
