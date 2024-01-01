@@ -126,3 +126,47 @@ body.loggedin {
 	margin: 0 0 10px 0;
 }
 
+.content form {
+  	display: flex;
+  	flex-wrap: wrap;
+  	justify-content: center;
+}
+
+.content form fieldset {
+  	display: flex;
+  	flex-wrap: wrap;
+  	justify-content: center;
+    width: 100%;
+}
+.content form label {
+  	display: flex;
+  	justify-content: left;
+  	align-items: center;
+  	width: 20%;
+  	height: 30px;
+    font-weight: bold;
+	color: #4a536e;
+	padding-right: 15px;
+}
+.content form input[type="password"], .content form input[type="text"], .content form input[type="email"] {
+  	width: 80%;
+  	height: 30px;
+  	border: 1px solid #dee0e4;
+  	margin-bottom: 10px;
+  	padding: 0 15px;
+}
+
+.content form input[type="submit"] {
+    height: 30px;
+  	width: 20%;
+  	background-color: #3274d6;
+  	border: 0;
+  	cursor: pointer;
+  	font-weight: bold;
+  	color: #ffffff;
+  	transition: background-color 0.2s;
+}
+.content form input[type="submit"]:hover {
+	background-color: #2868c7;
+  	transition: background-color 0.2s;
+}
