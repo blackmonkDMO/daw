@@ -78,9 +78,11 @@ $db->close;
                     </div>
             
                     <div>
-                        <p><strong>Șterge profil <?php echo $_SESSION['name']; ?>:</strong></p>
+                        <p><strong>Șterge profilul <?php echo $_SESSION['name']; ?>:</strong></p>
                         <form action="stergeprofil.php" method="post">
                             <fieldset>
+                                <label for="parola">Parola profilului:</label>
+                                <input type="password" name="parola" placeholder="Introdu parola actuală a profilului" id="parola" required>
                                 <p>Prin bifarea check-boxului de mai jos confirmați că sunteți de acrod cu ștergerea profilului. Datele profilului nu mai pot fi recuperate după ce este șters!</p>
                                 <input type="checkbox" id="confirmastergere" name="confirmastergere" value="confirmastergere">
                                 <label for="checkstergere">Sunt sigur</label>
