@@ -25,18 +25,18 @@ if (empty($_POST['nume']) || empty($_POST['prenume']) ||empty($_POST['utilizator
     <?php $is_error = True;
 }
             
-if (preg_match('/^[a-zA-Z0-9-]+$/', $_POST['nume']) == 0) { ?>
+if (preg_match('/^[a-zA-Z0-9ĂăÎîȘșȚț-]+$/', $_POST['nume']) == 0) { ?>
             <p>Numele <strong><?php echo $_POST['nume']; ?></strong> nu este unul valid. Numele poate conține litere mari, litere mici, cifre și caracterul "-"!</p>
     <?php $is_error = True;
 }
             
-if (preg_match('/^[a-zA-Z0-9-]+$/', $_POST['prenume']) == 0) { ?>
+if (preg_match('/^[a-zA-Z0-9ĂăÎîȘșȚț-]+$/', $_POST['prenume']) == 0) { ?>
             <p>Prenumele <strong><?php echo $_POST['prenume']; ?></strong> nu este unul valid. Prenumele poate conține litere mari, litere mici, cifre și caracterul "-"!</p>
     <?php $is_error = True;
 }
 
 if (preg_match('/^[a-zA-Z0-9_-]+$/', $_POST['utilizator']) == 0) { ?>
-            <p>Numele de utilizator <strong><?php echo $_POST['utilizator']; ?></strong> nu este unul valid. Numele de utilizator poate conține litere mari, litere mici, cifre și caracterele "-" sau "_"!</p>
+            <p>Numele de utilizator <strong><?php echo $_POST['utilizator']; ?></strong> nu este unul valid. Numele de utilizator poate conține litere mari, litere mici, cifre și caracterele "-" sau "_"! Nu poate conține diacritice!</p>
     <?php $is_error = True;
 }
 

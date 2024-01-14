@@ -9,7 +9,7 @@
         if ($_SESSION['loggedin'] == True) { ?>
             <div class="content">
                 <h2>Înregistrare</h2>
-                <p>Sunteți deja autentificat cu user <?php echo $_SESSION['name']; ?>!<br>Pentru a putea înregistra un alt utilizator vă rugăm să vă <a href="iesire.php">deconectați</a> mai întâi.</p>
+                <p>Sunteți deja autentificat cu user <strong><?php echo $_SESSION['name']; ?></strong>!<br>Pentru a putea înregistra un alt utilizator vă rugăm să vă <a href="iesire.php">deconectați</a> mai întâi.</p>
             </div>
         <?php }
         else { ?>

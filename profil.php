@@ -96,7 +96,7 @@ $db->close;
                 }
                 else { ?>
                     <h2>Cont neactivat!</h2>
-                    <p>Salut! Contul <strong><?php echo $_SESSION['name']; ?></strong> nu a fost activat. Vă rugăm să verificați adresa de email folosită la înregistrare pentru link-ul necesar activării.<br>Puteți face logout <a href=iesire.php>aici</a>.<br>Alternativ, puteți șterge acest profil <a href=stergere.php>aici</a>.</p>
+                    <p>Salut! Contul <strong><?php echo $_SESSION['name']; ?></strong> nu a fost activat. Vă rugăm să verificați adresa de email folosită la înregistrare pentru link-ul necesar activării.<br>Puteți face logout <a href=iesire.php>aici</a>.</p>
                 <?php }
             }
             else { ?>

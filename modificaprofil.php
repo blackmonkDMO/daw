@@ -26,7 +26,10 @@
                             $stmt->close();
                             
                             if (!empty($_POST['nume'])) { // Dacă s-a încercat schimbarea numelui
-                                if ($_POST['nume'] != $nume_actual) {
+                                if (preg_match('/^[a-zA-Z0-9ĂăÎîȘșȚț-]+$/', $_POST['nume']) == 0) { ?>
+                                    <p>Numele <strong><?php echo $_POST['nume']; ?></strong> nu este unul valid. Numele poate conține litere mari, litere mici, cifre și caracterul "-". Nu am modificat numele!</p>
+                                <?php }
+                                else if ($_POST['nume'] != $nume_actual) {
                                     if ($stmt = $db->prepare('UPDATE Conturi SET Nume = ? WHERE Id = ?')) {
                                         $stmt->bind_param('si', $_POST['nume'], $_SESSION['id']);
                                         $stmt->execute(); ?>
@@ -43,7 +46,10 @@
                             }
                             
                             if (!empty($_POST['prenume'])) { // Dacă s-a încercat schimbarea prenumelui
-                                if ($_POST['prenume'] != $prenume_actual) {
+                                if (preg_match('/^[a-zA-Z0-9ĂăÎîȘșȚț-]+$/', $_POST['prenume']) == 0) { ?>
+                                    <p>Prenumele <strong><?php echo $_POST['nume']; ?></strong> nu este unul valid. Prenumele poate conține litere mari, litere mici, cifre și caracterul "-". Nu am modificat prenumele!</p>
+                                <?php }
+                                else if ($_POST['prenume'] != $prenume_actual) {
                                     if ($stmt = $db->prepare('UPDATE Conturi SET Prenume = ? WHERE Id = ?')) {
                                         $stmt->bind_param('si', $_POST['prenume'], $_SESSION['id']);
                                         $stmt->execute(); ?>
@@ -61,7 +67,10 @@
                             
                             if (!empty($_POST['email'])) { // Dacă s-a încercat schimbarea emailului
                                 if ($_POST['email'] != $email_actual) {
-                                    if ($stmt = $db->prepare('UPDATE Conturi SET Email = ?, CodActivare = ? WHERE Id = ?')) {
+                                    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) { ?>
+                                        <p>Adresa de email introdusă nu este validă! Nu am modificat adresa de email</p>
+                                    <?php }
+                                    else if ($stmt = $db->prepare('UPDATE Conturi SET Email = ?, CodActivare = ? WHERE Id = ?')) {
                                         $uniqid = uniqid();
                                         $stmt->bind_param('ssi', $_POST['email'], $uniqid, $_SESSION['id']);
                                         $stmt->execute();
