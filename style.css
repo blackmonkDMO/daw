@@ -170,3 +170,11 @@ body.loggedin {
 	background-color: #2868c7;
   	transition: background-color 0.2s;
 }
+
+.content form select {
+    width: 80%;
+  	height: 30px;
+  	border: 1px solid #dee0e4;
+  	margin-bottom: 10px;
+  	padding: 0 15px;
+}

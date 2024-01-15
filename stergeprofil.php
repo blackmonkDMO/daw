@@ -26,14 +26,15 @@
                             $stmt->close();
                             
                             if (password_verify($_POST['parola'], $parola)) { // Dacă parola introdusă este corectă
+                                // TODO - trebuie ă verificăm că userul nu are împrumuturi active!
                                 if ($stmt = $db->prepare('DELETE FROM Conturi WHERE Id = ?')) {
                                     $stmt->bind_param('i', $_SESSION['id']);
                                     $stmt->execute(); ?>
                                     <p>Am șters profilul <strong><?php echo $_SESSION['name']; ?></strong></p>
                                     <p>Mulțumim pentru că ați folosit serviciile <strong>Bibliotecii BMK</strong></p>
                                     <?php $stmt->close;
-                                        session_destroy();
-                                    }
+                                    session_destroy();
+                                }
                                 else { ?>
                                     <p>Eroare SQL!</p>
                                 <?php }
@@ -53,6 +54,7 @@
 
                     if (!isset($_POST['profil'], $_POST['parola'], $_POST['confirmastergere']) || empty($_POST['profil']) || empty($_POST['parola']) || empty($_POST['confirmastergere'])) {  // dacă am primit un formular gol sau cu informații lipsă ?>
                         <p>A apărut o eroare! Asigură-te că ai selectat/introdus toate datele corect!</p>
+                        <p>Pentru a reveni la administrarea profilelor click<a href="adminprofile.php"> aici</a>.</p>
                     <?php }
                     else {
                         include_once('db.php');
@@ -72,10 +74,12 @@
                                     $stmt->close();
 
                                     if ($rol == 'user') { // dacă profilul de șters este unul normal
+                                        // TODO - trebuie ă verificăm că userul nu are împrumuturi active!
                                         if ($stmt = $db->prepare('DELETE FROM Conturi WHERE Utilizator = ?')) {
                                             $stmt->bind_param('s', $_POST['profil']);
                                             $stmt->execute(); ?>
-                                            <p>Am șters profilul <strong><?php echo $_SESSION['name']; ?></strong></p>
+                                            <p>Am șters profilul <strong><?php echo $_POST['profil']; ?></strong></p>
+                                            <p>Pentru a reveni la administrarea profilelor click <a href="adminprofile.php">aici</a>.</p>
                                             <?php $stmt->close;
                                         }
                                         else { ?>
@@ -89,6 +93,7 @@
                                                 $stmt->execute();
                                                 $stmt->store_result();
                                                 if ($stmt->num_rows > 1) { // dacă mai există cel puțin un cont de admin
+                                                    // TODO - trebuie ă verificăm că userul nu are împrumuturi active!
                                                     if ($stmt = $db->prepare('DELETE FROM Conturi WHERE Utilizator = ?')) {
                                                         $stmt->bind_param('s', $_POST['profil']);
                                                         $stmt->execute(); ?>
@@ -102,6 +107,7 @@
                                                 }
                                                 else { ?>
                                                     <p>Ești ultimul administrator, nu putem șterge acest profil!</p>
+                                                    <p>Pentru a reveni la administrarea profilelor click <a href="adminprofile.php">aici</a>.</p>
                                                 <?php }
                                             }
                                             else { ?>
@@ -110,6 +116,7 @@
                                         }
                                         else { ?>
                                             <p>Nu poți șterge profilul altui administrator!</p>
+                                            <p>Pentru a reveni la administrarea profilelor click <a href="adminprofile.php">aici</a>.</p>
                                         <?php }
                                     }
                                 }
@@ -119,6 +126,7 @@
                             }
                             else { // parola introdusă nu este corectă ?>
                                 <p>Parola introdusă nu este corectă! Nu putem șterge profilul!</p>
+                                <p>Pentru a reveni la administrarea profilelor click <a href="adminprofile.php">aici</a>.</p>
                             <?php }
                         }
                         else { ?>
