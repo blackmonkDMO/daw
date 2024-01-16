@@ -138,6 +138,13 @@ body.loggedin {
   	justify-content: center;
     width: 100%;
 }
+
+.content form fieldset p {
+  	display: flex;
+  	flex-wrap: wrap;
+  	justify-content: left;
+    width: 100%;
+}
 .content form label {
   	display: flex;
   	justify-content: left;

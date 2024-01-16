@@ -95,6 +95,10 @@
                                     </form>
                                 </div>
             
+                                <div>
+                                    <p><strong><a href=administrare.php>Înapoi la administrare</a></strong></p>
+                            </div>
+            
                                 <?php $stmt->close();
                                 
                             }
