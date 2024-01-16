@@ -12,7 +12,7 @@
                         <h2>Administrare profile</h2>
                             
                             <?php include_once('db.php');
-                            if ($stmt = $db->prepare('SELECT Utilizator, Nume, Prenume, Email, Rol, CodActivare FROM Conturi')) {
+                            if ($stmt = $db->prepare('SELECT Utilizator, Nume, Prenume, Email, Rol, CodActivare FROM Conturi ORDER BY Utilizator')) {
                                 $stmt->execute();
                                 $stmt->store_result();
                                 $stmt->bind_result($utilizator, $nume, $prenume, $email, $rol, $codactivare);

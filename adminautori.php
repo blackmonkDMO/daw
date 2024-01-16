@@ -12,7 +12,7 @@
                         <h2>Administrare autori</h2>
                             
                             <?php include_once('db.php');
-                            if ($stmt = $db->prepare('SELECT Id, Nume, Nationalitate FROM Autori')) {
+                            if ($stmt = $db->prepare('SELECT Id, Nume, Nationalitate FROM Autori ORDER BY NUME')) {
                                 $stmt->execute();
                                 $stmt->store_result();
                                 $stmt->bind_result($id_autor, $nume_autor, $nationalitate);
@@ -99,7 +99,7 @@
                         </div>
                     <?php }
                     else { ?>
-                        <h2>Administrare profile</h2>
+                        <h2>Administrare autori</h2>
                         <div>
                             <p>Acest profil are drepturi de administrator, însă nu a fost activat.<br> Vă rugăm verificați adresa de email asociată profilului pentru link-ul de activare!</p>
                         </div>
