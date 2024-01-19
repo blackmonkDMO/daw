@@ -29,6 +29,9 @@
                                 if (preg_match('/^[a-zA-Z0-9ĂăÎîȘșȚț-]+$/', $_POST['nume']) == 0) { ?>
                                     <p>Numele <strong><?php echo $_POST['nume']; ?></strong> nu este unul valid. Numele poate conține litere mari, litere mici, cifre și caracterul "-". Nu am modificat numele!</p>
                                 <?php }
+                                else if (strlen($_POST['nume']) > 50) { ?>
+                                    <p>Numele <strong><?php echo $_POST['nume']; ?></strong> este prea lung! Vă rugăm să folosiți un nume mai scurt. Nu am modificat numele!</p>
+                                <?php }
                                 else if ($_POST['nume'] != $nume_actual) {
                                     if ($stmt = $db->prepare('UPDATE Conturi SET Nume = ? WHERE Id = ?')) {
                                         $stmt->bind_param('si', $_POST['nume'], $_SESSION['id']);
@@ -49,6 +52,9 @@
                                 if (preg_match('/^[a-zA-Z0-9ĂăÎîȘșȚț-]+$/', $_POST['prenume']) == 0) { ?>
                                     <p>Prenumele <strong><?php echo $_POST['nume']; ?></strong> nu este unul valid. Prenumele poate conține litere mari, litere mici, cifre și caracterul "-". Nu am modificat prenumele!</p>
                                 <?php }
+                                else if (strlen($_POST['prenume']) > 50) { ?>
+                                    <p>Prenumele <strong><?php echo $_POST['prenume']; ?></strong> este prea lung! Vă rugăm să folosiți un prenume mai scurt. Nu am modificat prenumele!</p>
+                                <?php }
                                 else if ($_POST['prenume'] != $prenume_actual) {
                                     if ($stmt = $db->prepare('UPDATE Conturi SET Prenume = ? WHERE Id = ?')) {
                                         $stmt->bind_param('si', $_POST['prenume'], $_SESSION['id']);
@@ -68,7 +74,10 @@
                             if (!empty($_POST['email'])) { // Dacă s-a încercat schimbarea emailului
                                 if ($_POST['email'] != $email_actual) {
                                     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) { ?>
-                                        <p>Adresa de email introdusă nu este validă! Nu am modificat adresa de email</p>
+                                        <p>Adresa de email introdusă nu este validă! Nu am modificat adresa de email!</p>
+                                    <?php }
+                                    else if (strlen($_POST['email']) > 100) { ?>
+                                        <p>Adresa de email <strong><?php echo $_POST['email']; ?></strong> este prea lungă! Vă rugăm să folosiți o adresă de email mai scurtă. Nu am modificat adresa de email!</p>
                                     <?php }
                                     else if ($stmt = $db->prepare('UPDATE Conturi SET Email = ?, CodActivare = ? WHERE Id = ?')) {
                                         $uniqid = uniqid();

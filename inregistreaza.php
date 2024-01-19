@@ -30,13 +30,28 @@ if (preg_match('/^[a-zA-Z0-9ĂăÎîȘșȚț-]+$/', $_POST['nume']) == 0) { ?>
     <?php $is_error = True;
 }
             
+if (strlen($_POST['nume']) > 50) { ?>
+            <p>Numele <strong><?php echo $_POST['nume']; ?></strong> este prea lung! Vă rugăm să folosiți un nume mai scurt.</p>
+    <?php $is_error = True;
+}
+            
 if (preg_match('/^[a-zA-Z0-9ĂăÎîȘșȚț-]+$/', $_POST['prenume']) == 0) { ?>
             <p>Prenumele <strong><?php echo $_POST['prenume']; ?></strong> nu este unul valid. Prenumele poate conține litere mari, litere mici, cifre și caracterul "-"!</p>
+    <?php $is_error = True;
+}
+            
+if (strlen($_POST['prenume']) > 50) { ?>
+            <p>Prenumele <strong><?php echo $_POST['prenume']; ?></strong> este prea lung! Vă rugăm să folosiți un prenume mai scurt.</p>
     <?php $is_error = True;
 }
 
 if (preg_match('/^[a-zA-Z0-9_-]+$/', $_POST['utilizator']) == 0) { ?>
             <p>Numele de utilizator <strong><?php echo $_POST['utilizator']; ?></strong> nu este unul valid. Numele de utilizator poate conține litere mari, litere mici, cifre și caracterele "-" sau "_"! Nu poate conține diacritice!</p>
+    <?php $is_error = True;
+}
+            
+if (strlen($_POST['utilizator']) > 50) { ?>
+            <p>Numele de utilizator <strong><?php echo $_POST['utilizator']; ?></strong> este prea lung! Vă rugăm să folosiți un nume de utilizator mai scurt.</p>
     <?php $is_error = True;
 }
 
@@ -48,7 +63,12 @@ if (strlen($_POST['parola']) > 20 || strlen($_POST['parola']) < 5) { ?>
 if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) { ?>
             <p>Adresa de email introdusă nu este validă!</p>
     <?php $is_error = True;
-} 
+}
+
+if (strlen($_POST['email']) > 100) { ?>
+            <p>Adresa de email <strong><?php echo $_POST['email']; ?></strong> este prea lungă! Vă rugăm să folosiți o adresă de email mai scurtă.</p>
+    <?php $is_error = True;
+}
 
 if ($is_error == True) { ?>
             <p>Au fost detectate una sau mai multe probleme cu datele introduse în vederea înregistrării.<br>Vă rugăm să verificați informațiile de mai sus, și să reîncercați înregistrarea <a href=inregistrare.php>aici</a>.</p>
