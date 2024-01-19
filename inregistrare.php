@@ -25,6 +25,11 @@
                     <input type="password" name="parola" placeholder="Parolă" id="parola" required>
                     <label for="email"><i class="fas fa-envelope"></i></label>
                     <input type="email" name="email" placeholder="Email" id="email" required>
+                    
+                    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                    <div class="g-recaptcha" data-sitekey="6LdIDVYpAAAAAHWBXC878JxUx_8Va6Zqn-vySPuj"></div>
+                    <br/>
+                    
                     <input type="submit" value="Înregistrează">
                 </form>
             </div>

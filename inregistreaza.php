@@ -12,7 +12,7 @@ $is_error = False;
         <div class="content">
             <h2>Înregistrare</h2>
 
-<?php if (!isset($_POST['nume'], $_POST['prenume'], $_POST['utilizator'], $_POST['parola'], $_POST['email'])) { ?>
+<?php if (!isset($_POST['nume'], $_POST['prenume'], $_POST['utilizator'], $_POST['parola'], $_POST['email'], $_POST['g-recaptcha-response'])) { ?>
             <p>Pentru înregistrare vă rugăm să completați formularul de <a href=inregistrare.php>aici</a>!</p>
         </div>
     </body>
@@ -20,11 +20,11 @@ $is_error = False;
     <?php exit;
 }
 
-if (empty($_POST['nume']) || empty($_POST['prenume']) ||empty($_POST['utilizator']) || empty($_POST['parola']) || empty($_POST['email'])) { ?>
+if (empty($_POST['nume']) || empty($_POST['prenume']) ||empty($_POST['utilizator']) || empty($_POST['parola']) || empty($_POST['email']) || empty($_POST['g-recaptcha-response'])) { ?>
             <p>Nu ați completat toate datele necesare!</p>
     <?php $is_error = True;
 }
-            
+          
 if (preg_match('/^[a-zA-Z0-9ĂăÎîȘșȚț-]+$/', $_POST['nume']) == 0) { ?>
             <p>Numele <strong><?php echo $_POST['nume']; ?></strong> nu este unul valid. Numele poate conține litere mari, litere mici, cifre și caracterul "-"!</p>
     <?php $is_error = True;
@@ -68,6 +68,18 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) { ?>
 if (strlen($_POST['email']) > 100) { ?>
             <p>Adresa de email <strong><?php echo $_POST['email']; ?></strong> este prea lungă! Vă rugăm să folosiți o adresă de email mai scurtă.</p>
     <?php $is_error = True;
+}
+            
+//verificare recaptcha:
+$secret_key = '6LdIDVYpAAAAAOzSN50soeeaTlMOOr5mqBqRt5Tm';
+$url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . $secret_key . '&response=' . $_POST['g-recaptcha-response'];
+
+$rezultat = file_get_contents($url); // verific raspunsul-recaptcha la google
+$rezultat = json_decode($rezultat);  // google returnează json, trebuie să-l decodific, din fericire avem funcție builtin
+            
+if ($rezultat->success != true) { ?>
+        <p>A apărut o eroare la verificarea re-captcha!</p>
+        <?php $is_error = True;
 }
 
 if ($is_error == True) { ?>
