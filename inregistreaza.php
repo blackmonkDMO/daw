@@ -71,7 +71,7 @@ if (strlen($_POST['email']) > 100) { ?>
 }
             
 //verificare recaptcha:
-$secret_key = '6LdIDVYpAAAAAOzSN50soeeaTlMOOr5mqBqRt5Tm';
+$secret_key = 'cea mai secretă cheie';
 $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . $secret_key . '&response=' . $_POST['g-recaptcha-response'];
 
 $rezultat = file_get_contents($url); // verific raspunsul-recaptcha la google
